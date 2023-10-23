@@ -1,9 +1,13 @@
 import React from "react";
 import NavBar from "./navbar/navbar";
+import BodyMid from "./body/middlesection/bodyMid";
 
 function Home() {
     return (
-        <NavBar/>
+        <div>
+            <NavBar/>
+            <BodyMid/>
+        </div>
     );
 }
 

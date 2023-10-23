@@ -1,14 +1,40 @@
 import React from "react";
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import Link from '@mui/material/Link';
 
 function NavBar() {
     return (
-        <div class="navbar">
-            <ul class='navbar-nav mr-auto'>
-                <li><a href="xxx.asp">EagleBooks</a></li>
-                <li><p>Nie masz konta?<a href="xx">Zarejestruj się</a></p></li>
-                <li><a href="xxx.asp">Zaloguj</a></li>
-            </ul>
-        </div>
+                <Box sx={{ flexGrow: 1}} >
+            <AppBar position="static" sx={{backgroundColor: '#222'}}>
+                <Toolbar>
+                    <IconButton
+                        size="large"
+                        edge="start"
+                        color="inherit"
+                        aria-label="menu"
+                        sx={{ mr: 2 }}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                        EagleBooks
+                    </Typography>
+                    <Typography variant='body1' sx={{ flexGrow: 1 }}>
+                        Nie masz jeszcze konta?
+                    </Typography>
+                    <Link underline='hover' color='inherit' href='/'>
+                        Zarejestruj się!
+                    </Link>
+                    <Button color="inherit">Login</Button>
+                </Toolbar>
+            </AppBar>
+        </Box>
     );
 }
 
