@@ -10,7 +10,7 @@ import Link from '@mui/material/Link';
 
 function NavBar() {
     return (
-                <Box sx={{ flexGrow: 1}} >
+            <Box sx={{ flexGrow: 1}} >
             <AppBar position="static" sx={{backgroundColor: '#222'}}>
                 <Toolbar>
                     <IconButton
