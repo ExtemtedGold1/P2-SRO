@@ -26,10 +26,10 @@ function NavBar() {
                         EagleBooks
                     </Typography>
                     <Typography variant='body1' sx={{ flexGrow: 1 }}>
-                        Nie masz jeszcze konta?
+                        Welcome on our site
                     </Typography>
-                    <Link underline='hover' color='inherit' href='/'>
-                        Zarejestruj się!
+                    <Link underline='hover' color='inherit' href='/register'>
+                        Sign In!
                     </Link>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
