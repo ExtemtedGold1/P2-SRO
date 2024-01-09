@@ -31,7 +31,11 @@ function NavBar() {
                     <Link underline='hover' color='inherit' href='/register'>
                         Sign In!
                     </Link>
-                    <Button color="inherit">Login</Button>
+                    <Button color="inherit">
+                        <Link underline='hover' color='inherit' href='/login'>
+                            Login
+                        </Link>
+                    </Button>
                 </Toolbar>
             </AppBar>
         </Box>

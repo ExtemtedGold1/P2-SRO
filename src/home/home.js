@@ -1,14 +1,26 @@
-import React from "react";
-import NavBar from "./navbar/navbar";
-import BodyMid from "./body/middlesection/bodyMid";
+import React, {useEffect, useState} from "react";
+import LoggedIn from "./LoggedIn";
+import LoggedOut from "./LoggedOut";
+import {onAuthStateChanged} from "firebase/auth";
+import {auth} from "../config/firebase";
 
 function Home() {
-    return (
-        <div>
-            <NavBar/>
-            <BodyMid/>
-        </div>
-    );
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            setUser(user);
+        });
+        // Cleanup subscription on unmount
+        return () => unsubscribe();
+    }, []);
+
+    console.log(user)
+    if (user) {
+        return <LoggedIn/>
+    } else {
+        return <LoggedOut/>
+    }
 }
 
 export default Home;
