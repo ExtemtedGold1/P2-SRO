@@ -1,6 +1,7 @@
 import React from "react";
 import Button from '@mui/material/Button';
-function bodyMid() {
+
+function BodyMid() {
     return(
         <div>
             <h1>Tu będzie mapa</h1>
@@ -9,4 +10,4 @@ function bodyMid() {
         </div>
     );
 }
-export default bodyMid;
+export default BodyMid;

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Card, CardHeader, CardContent, TextField, Button} from '@mui/material';
+import {Card, CardHeader, CardContent, TextField, Button, Link} from '@mui/material';
 
 const LoginView = ({ onLogin }) => {
     const [email, setEmail] = useState('');
@@ -18,13 +18,15 @@ const LoginView = ({ onLogin }) => {
             <Card sx={{ backgroundColor: '#222'}}>
                 <CardHeader title='Login' display='center' sx={{color: '#fff'}}/>
                 <CardContent>
-                    <TextField label='email...' variant='outlined' margin='normal' placeholder='Enter your email'
+                    <TextField  sx={{ input: { color: 'white' }}} label='email...' variant='outlined' margin='normal' placeholder='Enter your email'
                     onChange={handleEmail}/>
-                    <TextField label='password...' variant='outlined' margin='normal' placeholder='Enter your password'
+                    <TextField sx={{ input: { color: 'white' }}} label='password...' variant='outlined' margin='normal' placeholder='Enter your password'
                     onChange={handlePassword}/>
                     <br/>
-                    <Button variant='contanied' color='primary' onClick={handleLogin}>
+                    <Button variant='contanied' color='primary' onClick={handleLogin} sx={{ color: 'white'}}>
+                        <Link color='inherit' href='/'>
                         Submit
+                        </Link>
                     </Button>
                 </CardContent>
             </Card>

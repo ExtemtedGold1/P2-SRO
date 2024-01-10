@@ -1,6 +1,7 @@
 import React from 'react';
 import NavBar from "./navbar/navbar";
 import Typography from "@mui/material/Typography";
+import BodyMid from './body/middlesection/bodyMid'; 
 
 const loggedOutHome = () => {
 
@@ -8,6 +9,7 @@ const loggedOutHome = () => {
         <>
             <NavBar/>
             <Typography> loggedOutHome </Typography>
+            <BodyMid/>
         </>
     )
 }
