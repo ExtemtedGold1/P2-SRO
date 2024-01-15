@@ -1,3 +1,4 @@
+
 import React, {useState} from 'react';
 import {Card, CardHeader, CardContent, TextField, Button} from '@mui/material';
 
@@ -15,13 +16,11 @@ const LoginView = ({ onLogin }) => {
     return (
         <>
             <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
-            <Card sx={{ backgroundColor: '#222'}}>
-                <CardHeader title='Login' display='center' sx={{color: '#fff'}}/>
+            <Card>
+                <CardHeader title='Login' display='center' sx={{color: '#fff', textAlign: 'center'}}/>
                 <CardContent>
-                    <TextField label='email...' variant='outlined' margin='normal' placeholder='Enter your email'
-                    onChange={handleEmail}/>
-                    <TextField label='password...' variant='outlined' margin='normal' placeholder='Enter your password'
-                    onChange={handlePassword}/>
+                    <TextField label='email...' variant='standard' margin='normal' placeholder='Enter your email' onChange={handleEmail} sx={{color: '#fff'}} required inputProps={{ sx: {color: '#fff'} }}/>
+                    <TextField label='password...' variant='standard' margin='normal' placeholder='Enter your password' onChange={handlePassword} required inputProps={{ sx: {color: '#fff'} }}/>
                     <br/>
                     <Button variant='contanied' color='primary' onClick={handleLogin}>
                         Submit

@@ -1,13 +1,14 @@
 import React from 'react';
 import NavBarLogged from './navbar/navbar-loged';
-import Typography from "@mui/material/Typography";
+import BodyMid from "./body/middlesection/bodyMid";
+import Footer from "./footer/footer";
 
-const loggedInHome = () => {
-
+const loggedInHome = ({user}) => {
     return (
         <>
-            <NavBarLogged/>
-            <Typography> loggedHome </Typography>
+            <NavBarLogged user={user}/>
+            <BodyMid/>
+            <Footer/>
         </>
     )
 }

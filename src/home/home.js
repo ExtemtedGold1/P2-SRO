@@ -17,9 +17,9 @@ function Home() {
 
     console.log(user)
     if (user) {
-        return <LoggedIn/>
+        return <LoggedIn user={user}/>;
     } else {
-        return <LoggedOut/>
+        return <LoggedOut/>;
     }
 }
 

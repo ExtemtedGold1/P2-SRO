@@ -2,9 +2,7 @@ import React from 'react';
 import { Button } from '@mui/material';
 import { signOut } from 'firebase/auth';
 import { auth } from '../config/firebase';
-
 export const SignOut = () => {
-
     const signOutHandle = async () => {
         try{
             await signOut(auth)
@@ -15,7 +13,7 @@ export const SignOut = () => {
     }
 
     return (
-        <Button onClick={signOutHandle}>
+        <Button onClick={signOutHandle} color='secondary'>
             Logout
         </Button>
     )

@@ -1,15 +1,15 @@
 import React from 'react';
 import NavBar from "./navbar/navbar";
-import Typography from "@mui/material/Typography";
+import Footer from './footer/footer';
+import BodyMidLoggedOut from "./body/middlesection/bodyMidLoggedOut";
 
 const loggedOutHome = () => {
-
     return (
-        <>
+        <div>
             <NavBar/>
-            <Typography> loggedOutHome </Typography>
-        </>
+            <BodyMidLoggedOut/>
+            <Footer/>
+        </div>
     )
 }
-
 export default loggedOutHome;

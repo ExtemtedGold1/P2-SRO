@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import {SignOut} from "../../components/logout";
 
-function NavBarLogged() {
+function NavBarLogged({user}) {
     return (
         <Box sx={{ flexGrow: 1}} >
             <AppBar position="static" sx={{backgroundColor: '#222'}}>
@@ -27,6 +27,7 @@ function NavBarLogged() {
                     <Typography variant='body1' sx={{ flexGrow: 1 }}>
                         Welcome on our site
                     </Typography>
+                    <Box>email: {user.email}</Box>
                     <SignOut/>
                 </Toolbar>
             </AppBar>
