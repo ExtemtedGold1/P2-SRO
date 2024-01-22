@@ -2,14 +2,73 @@ import React, {useEffect, useState} from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button"
 import Skeleton from '@mui/material/Skeleton'
-import { useJsApiLoader, GoogleMap, Marker } from '@react-google-maps/api';
+import { useJsApiLoader, GoogleMap, Marker  } from '@react-google-maps/api';
 import { styled } from "@mui/material";
 import MyLocation from "../../config/getLocalization";
+import Link from "@mui/material/Link";
 
-const mapStyle = {
-    width: '100%',
-    height: '500px'
+const libraries = ['places'];
+
+const MapGen = () =>{
+    const { isLoaded } = useJsApiLoader({googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+        libraries: libraries,
+    })
+    const [centerMap, setCenterMap] = useState({lat: 0,lng: 0});
+    const [map, setMap] = useState(null);
+    const [searchResults, setSearchResults ] = useState([]);
+    const position = MyLocation();
+    const radius = 1500;
+
+    useEffect(() => {
+        if(position.coord.latitude && position.coord.longitude && isLoaded){
+            setCenterMap({lat: position.coord.latitude, lng: position.coord.longitude});
+            const types = ['park', 'outdoor_space', 'stadium', 'sports_complex'];
+            const service = new window.google.maps.places.PlacesService(map);
+            service.nearbySearch(
+                {
+                    location: {lat: position.coord.latitude, lng: position.coord.longitude},
+                    radius: radius,
+                    type: types,
+                },
+                (results, status)=> {
+                    if (status === window.google.maps.places.PlacesServiceStatus.OK){
+                        console.log(results.entries())
+                        setSearchResults(results);
+                    } else {
+                        console.error(status);
+                    }
+                }
+            )
+        }
+    }, [map, position]);
+
+    if (!isLoaded){
+        return <Skeleton/>
+    }
+    return (
+        <Box>
+                {/* Google Map Box */}
+            <GoogleMap center={centerMap} zoom={15} mapContainerStyle={mapStyle} onLoad={setMap}
+            options={{
+                zoomControl: false,
+                streetViewControl: false,
+                mapTypeControl: false,
+            }}>
+                <StyledButton><Link href='/search'>Search</Link></StyledButton>
+                { searchResults.map((place, index) => {
+                    if (place.geometry && place.geometry.location) {
+                        return <Marker key={index} position={{
+                            lat: place.geometry.location.lat(),
+                            lng: place.geometry.location.lng()
+                        }}/>
+                    }
+                })}
+            </GoogleMap>
+        </Box>
+    )
 }
+
+export default MapGen;
 
 const StyledButton = styled(Button)({
     position: 'absolute',
@@ -34,37 +93,7 @@ const StyledButton = styled(Button)({
     },
 });
 
-const MapGen = () =>{
-    const { isLoaded } = useJsApiLoader({googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-        libraries: ['places']
-    })
-    const [center, setCenter] = useState({lat: 0,lng: 0});
-    const position = MyLocation();
-
-    useEffect(() => {
-        if(position.coord.latitude && position.coord.longitude){
-            setCenter({lat: position.coord.latitude, lng: position.coord.longitude});
-        }
-    }, [position]);
-
-    if (!isLoaded){
-        return <Skeleton/>
-    }
-    return (
-        <Box>
-            {/* Google Map Box */}
-            <GoogleMap center={center} zoom={15} mapContainerStyle={mapStyle}
-            options={{
-                zoomControl: false,
-                streetViewControl: false,
-                mapTypeControl: false,
-            }}>
-                <StyledButton>Search</StyledButton>
-                {/* Displayin markers, or directions */}
-                <Marker position={{lat: -25.363882, lng: 131.044922}}/>
-            </GoogleMap>
-        </Box>
-    )
+const mapStyle = {
+    width: '100%',
+    height: '500px'
 }
-
-export default MapGen;

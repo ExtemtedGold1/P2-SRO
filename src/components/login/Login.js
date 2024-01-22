@@ -18,14 +18,6 @@ export const Login = () => {
                     // const errorCode = error.code;
                     // const errorMessage = error.message;
                 });
-
-            // setTimeout(() => {
-            //     signOut(auth).then(() => {
-            //         navigate('/login'); // navigate to login page after logout
-            //     }).catch((error) => {
-            //         console.error(error);
-            //     });
-            // },  6000);
         } catch (e) {
             console.log(e);
         }

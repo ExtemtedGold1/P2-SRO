@@ -7,7 +7,7 @@ const loggedInHome = ({user}) => {
     return (
         <>
             <NavBarLogged user={user}/>
-            <BodyMid/>
+            <BodyMid user={user}/>
             <Footer/>
         </>
     )

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import LoggedIn from "./LoggedIn";
 import LoggedOut from "./LoggedOut";
-import {onAuthStateChanged} from "firebase/auth";
+import {onAuthStateChanged, signOut} from "firebase/auth";
 import {auth} from "../config/firebase";
 
 function Home() {
@@ -10,6 +10,17 @@ function Home() {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             setUser(user);
+            if(user){
+                setTimeout(()=>{
+                    signOut(auth)
+                        .then(()=>{
+                            console.log('user singed out');
+                        })
+                        .catch((error) => {
+                            console.error('Sign out error', error);
+                        });
+                },3600000);
+            }
         });
         // Cleanup subscription on unmount
         return () => unsubscribe();
