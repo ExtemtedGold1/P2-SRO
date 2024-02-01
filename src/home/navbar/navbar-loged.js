@@ -6,6 +6,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import {SignOut} from "../../components/logout";
+import Link from '@mui/material/Link';
 
 function NavBarLogged({user}) {
     return (
@@ -27,7 +28,7 @@ function NavBarLogged({user}) {
                     <Typography variant='body1' sx={{ flexGrow: 1 }}>
                         Welcome on our site
                     </Typography>
-                    <Box>email: {user.email}</Box>
+                    <Box><Link href='/profilView' sx={{ color: '#fff'}}>email: {user.email}</Link></Box>
                     <SignOut/>
                 </Toolbar>
             </AppBar>

@@ -1,23 +1,23 @@
 import React from 'react';
-import {
-    Box, Card, CardContent, Table
-    , Button, Typography, TableContainer, TableHead, TableRow, TableCell, TableBody
+import {Card, CardContent, Table, Button, Typography, TableContainer, TableHead, TableRow, TableCell, TableBody, Grid
 } from "@mui/material";
 import {CardTitle} from "react-bootstrap";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Paper from "@mui/material/Paper";
 
-
-
-
 const Profile = ({user}) =>{
     return(
-        <Box>
-            <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
-                    <Card sx={{ padding:1, height: '17vh'}}>
-                        <CardTitle>
-                            <AccountCircleIcon fontSize='large'/>
-                            {user.uid}
+            <Grid container spacing={0} sx={{alignItems: 'center', justifyContent: 'center',  textAlign: 'center'}}>
+                <Grid item xs={3}>
+                    <Card sx={{ padding:1}}>
+                        <CardTitle style={{ paddingLeft: 20, paddingRight: 20}}>
+                            { user.photoURL ? <img src={user.photoURL} style={{ borderRadius: 20}}
+                                onError={(e) => {
+                                    e.target.onerror = null
+                                }} /> :
+                                <AccountCircleIcon fontSize='large'/>
+                            }
+                            <Typography>{user.displayName}</Typography>
                         </CardTitle>
                         <CardContent>
                             <Typography>M</Typography>
@@ -25,7 +25,8 @@ const Profile = ({user}) =>{
                             <Typography>A</Typography>
                         </CardContent>
                     </Card>
-
+                </Grid>
+                <Grid item xs={7}>
                     <Card sx={{ padding:1}}>
                         <CardTitle>Ranking</CardTitle>
                         <CardContent>
@@ -53,9 +54,11 @@ const Profile = ({user}) =>{
                             </TableContainer>
                         </CardContent>
                     </Card>
-                    <Button color='success' variant='contained'>Join now!</Button>
-            </div>
-        </Box>
+                </Grid>
+                    <Grid item xs={2}>
+                        <Button color='success' variant='contained'>Join now!</Button>
+                    </Grid>
+            </Grid>
     )
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     TextField,
     Button,
@@ -16,7 +16,6 @@ const SearchView = () => {
     const [district, setDistrict] = useState('');
     const [sport, setSport] = useState('');
     const [type, setType] = useState('');
-
     const handleSearch = () => {
         // handle search logic here
     };

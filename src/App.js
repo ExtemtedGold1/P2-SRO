@@ -5,6 +5,7 @@ import Home from './home/home';
 import { Register } from './components/register/register';
 import {Login} from "./components/login/Login";
 import SearchView from "./components/search/SearchView";
+import ProfilView from "./components/ProfilView";
 function App() {
   return (
     <Router>
@@ -13,6 +14,7 @@ function App() {
             <Route path='/register' Component={Register}/>
             <Route path='/login' Component={Login}/>
             <Route path='/search' Component={SearchView}/>
+            <Route path='/profilview' Component={ProfilView}/>
         </Routes>
     </Router>
   );

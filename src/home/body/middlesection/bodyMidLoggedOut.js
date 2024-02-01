@@ -1,15 +1,22 @@
 import React from 'react';
-import { Container } from '@mui/material'
+import { Grid } from '@mui/material'
+import MapGen from "../map";
+import Typography from "@mui/material/Typography";
+import JoinUs from '../../../components/JoinUs'
 const BodyMidLoggedOut = () => {
     return (
-        <Container>
-            <div>
+            <Grid contaier spacing={2} >
+                <Grid item xs>
+                    <MapGen/>
+                </Grid>
+                <Grid item xs>
 
-            </div>
-            <div>
+                </Grid>
+                <Grid item xs={12} sx={{ backgroundColor: '#000', color: '#fff'}}>
+                    <JoinUs/>
+                </Grid>
 
-            </div>
-        </Container>
+            </Grid>
     )
 }
 

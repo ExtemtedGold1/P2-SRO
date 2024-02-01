@@ -2,7 +2,7 @@
 import React, {useState} from 'react';
 import {Card, CardHeader, CardContent, TextField, Button} from '@mui/material';
 
-const LoginView = ({ onLogin }) => {
+const LoginView = ({ onLogin, onLoginGoogle }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword ] = useState('');
 
@@ -11,6 +11,10 @@ const LoginView = ({ onLogin }) => {
 
     const handleLogin = () => {
         onLogin(email, password);
+    }
+
+    const handleLoginGoogle = () => {
+        onLoginGoogle(email, password);
     }
 
     return (
@@ -24,6 +28,9 @@ const LoginView = ({ onLogin }) => {
                     <br/>
                     <Button variant='contanied' color='primary' onClick={handleLogin}>
                         Submit
+                    </Button>
+                    <Button variant='contanied' color='secondary' onClick={handleLoginGoogle}>
+                        Google login
                     </Button>
                 </CardContent>
             </Card>

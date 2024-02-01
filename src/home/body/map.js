@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button"
 import Skeleton from '@mui/material/Skeleton'
-import { useJsApiLoader, GoogleMap, Marker  } from '@react-google-maps/api';
+import {useJsApiLoader, GoogleMap, Marker, InfoWindow} from '@react-google-maps/api';
 import { styled } from "@mui/material";
 import MyLocation from "../../config/getLocalization";
 import Link from "@mui/material/Link";
@@ -16,13 +16,14 @@ const MapGen = () =>{
     const [centerMap, setCenterMap] = useState({lat: 0,lng: 0});
     const [map, setMap] = useState(null);
     const [searchResults, setSearchResults ] = useState([]);
+    const [selectedPlace, setSelectedPlace ] = useState(null)
     const position = MyLocation();
-    const radius = 1500;
+    const radius = 3000;
 
     useEffect(() => {
         if(position.coord.latitude && position.coord.longitude && isLoaded){
             setCenterMap({lat: position.coord.latitude, lng: position.coord.longitude});
-            const types = ['park', 'outdoor_space', 'stadium', 'sports_complex'];
+            const types = ['stadium'];
             const service = new window.google.maps.places.PlacesService(map);
             service.nearbySearch(
                 {
@@ -43,7 +44,7 @@ const MapGen = () =>{
     }, [map, position]);
 
     if (!isLoaded){
-        return <Skeleton/>
+        return (<Skeleton/>);
     }
     return (
         <Box>
@@ -57,12 +58,33 @@ const MapGen = () =>{
                 <StyledButton><Link href='/search'>Search</Link></StyledButton>
                 { searchResults.map((place, index) => {
                     if (place.geometry && place.geometry.location) {
-                        return <Marker key={index} position={{
-                            lat: place.geometry.location.lat(),
-                            lng: place.geometry.location.lng()
-                        }}/>
+                        return (<Marker
+                            key={index}
+                            position={{
+                                lat: place.geometry.location.lat(),
+                                lng: place.geometry.location.lng()
+                        }}
+                        onClick={() => {
+                            setSelectedPlace(place);
+                        }}
+                        />
+                        )
                     }
                 })}
+                { selectedPlace && (
+                    <InfoWindow position={{
+                        lat: selectedPlace.geometry.location.lat(),
+                        lng: selectedPlace.geometry.location.lng()
+                    }} onCloseClick={() => {
+                        setSelectedPlace(null);
+                    }}
+                    >
+                        <div>
+                            <h2>{selectedPlace.name}</h2>
+                            <p>{selectedPlace.vicinity}</p>
+                        </div>
+                    </InfoWindow>
+                )}
             </GoogleMap>
         </Box>
     )
@@ -94,6 +116,6 @@ const StyledButton = styled(Button)({
 });
 
 const mapStyle = {
-    width: '100%',
+    //width: '100%',
     height: '500px'
 }

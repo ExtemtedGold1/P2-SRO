@@ -1,8 +1,10 @@
 import React from 'react';
-import {Button, Card, CardContent, CardHeader, TextField} from "@mui/material";
+import {Button, Card, CardContent, CardHeader, TextField, Link} from "@mui/material";
 import {useState} from "react";
+import {CardFooter} from "react-bootstrap";
+import Typography from "@mui/material/Typography";
 
-const RegisterView = ({ onRegister }) => {
+const RegisterView = ({ onRegister, onRegisterGoogle }) => {
     const [email, setEmail ] = useState('');
     const [password, setPassword ] = useState('');
     const [confirmPassword, setConfirmPassword ] = useState('');
@@ -13,7 +15,13 @@ const RegisterView = ({ onRegister }) => {
 
     const handleRegister = () => {
         onRegister(email, password, confirmPassword);
-    }
+    };
+
+    const handleRegisterGoogle = () => {
+        onRegisterGoogle(email,password,confirmPassword);
+    };
+
+
 
     return (
         <>
@@ -40,6 +48,12 @@ const RegisterView = ({ onRegister }) => {
                     <Button variant='contained' color='primary' onClick={handleRegister}>
                         Submit
                     </Button>
+                    <CardFooter>
+                        <div style={{ padding: 20}}>
+                        <Typography><Link color='secondary' onClick={handleRegisterGoogle}> Sign In<
+                        /Link> with Google</Typography>
+                        </div>
+                    </CardFooter>
                 </CardContent>
             </Card>
         </>

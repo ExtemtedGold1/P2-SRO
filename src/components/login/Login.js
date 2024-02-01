@@ -1,11 +1,13 @@
 import React from 'react';
 import {auth} from "../../config/firebase";
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import {GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup} from 'firebase/auth';
 import LoginView from "./LoginView";
 import { useNavigate } from 'react-router-dom';
 
 
 export const Login = () => {
+    const provider = new GoogleAuthProvider();
+    provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
     const navigate = useNavigate();
     const loginUser = async (email, password) => {
         try {
@@ -23,9 +25,20 @@ export const Login = () => {
         }
     }
 
+    const loginUserGoogle = ()=> {
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                const user = result.user;
+                navigate('/');
+            }).catch((error) => {
+            console.warn(error);
+        })
+
+    }
+
     return (
         <>
-            <LoginView onLogin={loginUser}/>
+            <LoginView onLogin={loginUser} onLoginGoogle={loginUserGoogle}/>
         </>
     )
 
